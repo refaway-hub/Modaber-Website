@@ -1,0 +1,1906 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+    background-color: #f4f6f9;
+    color: #333;
+    direction: rtl;
+}
+
+
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background-color: #ffffff;
+    padding: 25px 20px;
+    border-left: 1px solid #eef2f5;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    font-size: 28px;
+    color: #3b82f6;
+}
+
+.logo-text h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: #1e293b;
+}
+
+.logo-text p {
+    font-size: 11px;
+    color: #64748b;
+}
+
+.sidebar-menu {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar-menu li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    color: #64748b;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.sidebar-menu li.active a,
+.sidebar-menu li a:hover {
+    background-color: #eff6ff;
+    color: #2563eb;
+    font-weight: 700;
+}
+
+
+.quick-actions h3 {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-bottom: 12px;
+}
+
+.action-btn {
+    width: 100%;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-blue { background-color: #eff6ff; color: #2563eb; }
+.btn-green { background-color: #f0fdf4; color: #16a34a; }
+.btn-purple { background-color: #faf5ff; color: #9333ea; }
+.btn-orange { background-color: #fff7ed; color: #ea580c; }
+
+
+.main-content {
+    flex: 1;
+    padding: 25px 35px;
+}
+
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.header-user {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-user img {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-info strong { font-size: 14px; color: #1e293b; }
+.user-info span { font-size: 11px; color: #94a3b8; }
+
+.notification-badge, .search-btn {
+    width: 40px;
+    height: 40px;
+    background: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    color: #64748b;
+}
+
+.notification-badge .count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #ef4444;
+    color: white;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.status-online {
+    color: #16a34a;
+    background: #f0fdf4;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.brand-title h1 { font-size: 24px; color: #1e293b; }
+.brand-title p { font-size: 12px; color: #64748b; }
+
+.main-logo-icon {
+    font-size: 32px;
+    color: #2563eb;
+    background: #eff6ff;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+/* ========================================== */
+/*                CSS GRID الأساسي            */
+/* ========================================== */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* الكروت العامة */
+.grid-card, .summary-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid #f1f5f9;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.card-header h2 { font-size: 16px; color: #1e293b; }
+.view-all { font-size: 12px; color: #64748b; text-decoration: none; }
+
+/* 1. ملخص الرصيد العلوي */
+.summary-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.card-label { font-size: 13px; color: #64748b; }
+.card-value { font-size: 26px; font-weight: 800; color: #0f172a; }
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    width: max-content;
+    padding: 2px 8px;
+    border-radius: 6px;
+}
+.badge-green { color: #16a34a; background: #f0fdf4; }
+.badge-red { color: #dc2626; background: #fef2f2; }
+
+/* 2. جدول المعاملات الأخيرة */
+.recent-transactions {
+    grid-column: span 2;
+}
+
+.transactions-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.transactions-table th, .transactions-table td {
+    padding: 12px 10px;
+    text-align: right;
+    font-size: 13px;
+}
+
+.transactions-table th { color: #94a3b8; font-weight: 600; border-bottom: 1px solid #f1f5f9; }
+
+.user-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-cell img, .category-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.category-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.bg-orange { background-color: #f97316; }
+.bg-blue { background-color: #3b82f6; }
+.bg-red { background-color: #ef4444; }
+
+.status-pill {
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+}
+.status-success { background: #f0fdf4; color: #16a34a; }
+.status-warning { background: #fffbeb; color: #d97706; }
+
+.text-green { color: #16a34a; font-weight: 700; }
+.text-dark { color: #0f172a; font-weight: 700; }
+
+/* 3. الأنشطة الحديثة */
+.recent-activities {
+    grid-column: span 1;
+}
+
+.activity-item {
+    border-right: 4px solid #3b82f6;
+    background: #f8fafc;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.activity-blue { border-color: #3b82f6; }
+.activity-green { border-color: #22c55e; }
+
+.activity-content strong { font-size: 13px; display: block; color: #1e293b; }
+.activity-content p { font-size: 11px; color: #64748b; }
+.activity-content small { font-size: 10px; color: #94a3b8; }
+
+.view-all-center {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    color: #2563eb;
+    text-decoration: none;
+    margin-top: 15px;
+}
+
+/* 4. الفواتير الشهرية */
+.monthly-bills {
+    grid-column: span 1;
+}
+
+.bills-total h3 { font-size: 24px; color: #0f172a; }
+.bills-total p { font-size: 11px; color: #94a3b8; margin-bottom: 15px; }
+
+.bills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.bill-box {
+    background: #f8fafc;
+    padding: 12px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.bill-amount { font-size: 14px; font-weight: 700; }
+
+/* 5. وسائل الدفع */
+.payment-methods {
+    grid-column: span 1;
+}
+
+.credit-card {
+    border-radius: 14px;
+    padding: 18px;
+    color: white;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card-purple { background: linear-gradient(135deg, #4f46e5, #3730a3); }
+.card-red { background: linear-gradient(135deg, #e11d48, #9f1239); }
+
+.card-top { display: flex; justify-content: space-between; align-items: center; }
+.card-number { font-size: 18px; letter-spacing: 2px; }
+.card-bottom { display: flex; justify-content: space-between; font-size: 11px; }
+
+/* 6. رسم بياني بسيط */
+.chart-section {
+    grid-column: span 1;
+}
+
+.bar-chart {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 150px;
+    margin-top: 20px;
+}
+
+.chart-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    height: 100%;
+    justify-content: flex-end;
+}
+
+.bars {
+    display: flex;
+    gap: 5px;
+    align-items: flex-end;
+    height: 120px;
+}
+
+.bar { width: 12px; border-radius: 4px; }
+.bar-income { background-color: #22c55e; }
+.bar-expense { background-color: #ef4444; }
+
+/* 7 & 8. باقي الكروت */
+.budget-overview { grid-column: span 1; }
+.account-summary { grid-column: span 1; }
+
+.acc-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: #f8fafc;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.acc-right { display: flex; align-items: center; gap: 10px; }
+.acc-icon { width: 35px; height: 35px; border-radius: 8px; display: flex; justify-content: center; align-items: center; }
+
+.progress-bar-full, .progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.progress-fill { height: 100%; }
+.bg-blue { background-color: #2563eb; }
+.bg-orange { background-color: #f97316; }
+.bg-red { background-color: #ef4444; }
+.bg-pink { background-color: #ec4899; }
+
+
+/* ========================================== */
+/*               Top Header Card              */
+/* ========================================== */
+.top-header-card {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    border: 1px solid #f1f5f9;
+    margin-bottom: 25px;
+}
+
+/* الجزء الأيمن */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-box {
+    background: linear-gradient(135deg, #4f46e5, #3b82f6);
+    color: #ffffff;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    box-shadow: 0 6px 15px rgba(59, 130, 246, 0.3);
+}
+
+.brand-info h1 {
+    font-size: 22px;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.1;
+    margin: 0;
+}
+
+.brand-info p {
+    font-size: 11px;
+    color: #64748b;
+    margin-top: 3px;
+}
+
+.status-online {
+    background-color: #f0fdf4;
+    color: #16a34a;
+    border: 1px solid #bbf7d0;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-right: 10px;
+}
+
+.status-online .dot {
+    width: 7px;
+    height: 7px;
+    background-color: #16a34a;
+    border-radius: 50%;
+}
+
+/* الجزء الأيسر */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-icon-btn {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    color: #64748b;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.header-icon-btn:hover {
+    background-color: #f1f5f9;
+    color: #0f172a;
+}
+
+.notification-btn {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    color: #64748b;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+}
+
+.badge-count {
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    background-color: #ef4444;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #ffffff;
+}
+
+.user-profile-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 6px 14px 6px 8px;
+    border-radius: 12px;
+}
+
+.user-profile-card img {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-details strong {
+    font-size: 13px;
+    color: #0f172a;
+    line-height: 1.2;
+}
+
+.user-details span {
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+
+
+/* ========================================== */
+/*           Sidebar Style (طبق الأصل)        */
+/* ========================================== */
+.sidebar {
+    width: 250px;
+    background-color: #ffffff;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    border-left: 1px solid #f1f5f9;
+}
+
+/* اللوجو العلوي */
+.sidebar-brand {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.brand-text {
+    text-align: right;
+}
+
+.brand-text h2 {
+    font-size: 26px;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1;
+    margin: 0;
+}
+
+.brand-text p {
+    font-size: 11px;
+    color: #64748b;
+    margin-top: 4px;
+}
+
+.brand-icon {
+    background: linear-gradient(135deg, #4f46e5, #3b82f6);
+    color: #ffffff;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    box-shadow: 0 6px 15px rgba(59, 130, 246, 0.25);
+}
+
+/* عناصر القائمة الجانبية */
+.sidebar-nav {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebar-nav li a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 18px;
+    color: #475569;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.sidebar-nav li a i {
+    font-size: 16px;
+}
+
+/* التاب النشطة (الصفحة الرئيسية) */
+.sidebar-nav li.active a {
+    background-color: #eff6ff;
+    color: #2563eb;
+    font-weight: 700;
+}
+
+.sidebar-nav li a:hover {
+    background-color: #f8fafc;
+    color: #1e293b;
+}
+
+/* إجراءات سريعة */
+.quick-actions-section {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.quick-actions-section h3 {
+    font-size: 12px;
+    color: #94a3b8;
+    text-align: right;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.action-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 4px 0;
+    transition: transform 0.2s ease;
+}
+
+.action-item:hover {
+    transform: translateX(-3px);
+}
+
+.action-item span {
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.action-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+}
+
+/* ألوان المربعات الصغير للأيقونات */
+.icon-blue {
+    background-color: #eff6ff;
+    color: #2563eb;
+}
+
+.icon-green {
+    background-color: #f0fdf4;
+    color: #16a34a;
+}
+
+.icon-purple {
+    background-color: #faf5ff;
+    color: #a855f7;
+}
+
+.icon-orange {
+    background-color: #fff7ed;
+    color: #f97316;
+}
+
+/* ========================================== */
+/*           CSS Grid Section (السفلي)        */
+/* ========================================== */
+
+.bottom-section-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* ------------------------------------------ */
+/*      Bonus: 3D Credit Card Flip Animation  */
+/* ------------------------------------------ */
+
+.cards-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.flip-card {
+    background-color: transparent;
+    width: 100%;
+    height: 160px;
+    perspective: 1000px; /* يعطي العمق ثلاثي الأبعاد */
+    cursor: pointer;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: right;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+}
+
+/* التدوير عند عمل Hover على الكارت */
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden; /* إخفاء الوجه الخلفي أثناء الدوران */
+    border-radius: 16px;
+    padding: 18px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* الوش */
+.card-purple {
+    background: linear-gradient(135deg, #4338ca 0%, #312e81 100%);
+}
+
+.card-red {
+    background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+}
+
+/* الضهر */
+.flip-card-back {
+    transform: rotateY(180deg);
+    padding: 0;
+    justify-content: flex-start;
+}
+
+.card-purple-back {
+    background: #2e1065;
+}
+
+.card-red-back {
+    background: #450a0a;
+}
+
+.magnetic-strip {
+    width: 100%;
+    height: 35px;
+    background-color: #0f172a;
+    margin-top: 20px;
+}
+
+.cvv-box {
+    background-color: #ffffff;
+    color: #0f172a;
+    width: 80%;
+    margin: 10px auto;
+    padding: 6px 12px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+}
+
+.card-notice {
+    font-size: 10px;
+    color: #94a3b8;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 10px;
+}
+
+.card-brand {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.card-chip {
+    font-size: 22px;
+    color: #fbbf24;
+}
+
+.card-number {
+    font-size: 16px;
+    letter-spacing: 2px;
+    direction: ltr;
+    text-align: right;
+}
+
+.card-bottom {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+}
+
+.paypal-card {
+    background-color: #1e40af;
+    color: white;
+    padding: 15px;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.paypal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.paypal-icon { font-size: 20px; }
+.paypal-status { font-size: 10px; opacity: 0.8; }
+
+/* ------------------------------------------ */
+/*      Chart Section (الرسم البياني)        */
+/* ------------------------------------------ */
+
+.chart-legend {
+    display: flex;
+    gap: 15px;
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+.legend-green { color: #16a34a; }
+.legend-red { color: #dc2626; }
+
+.bars-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 180px;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 10px;
+}
+
+.chart-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+    justify-content: flex-end;
+}
+
+.chart-col span {
+    font-size: 11px;
+    color: #64748b;
+}
+
+.bars-group {
+    display: flex;
+    gap: 6px;
+    align-items: flex-end;
+    height: 140px;
+}
+
+.bar {
+    width: 10px;
+    border-radius: 4px;
+    transition: height 0.3s ease;
+}
+
+.bar-green { background-color: #16a34a; }
+.bar-red { background-color: #dc2626; }
+
+/* ------------------------------------------ */
+/*      Budget & Summary Sections             */
+/* ------------------------------------------ */
+
+.budget-main-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    background-color: #f8fafc;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.budget-stat small {
+    display: block;
+    font-size: 11px;
+    color: #64748b;
+}
+
+.budget-stat strong {
+    font-size: 16px;
+    color: #0f172a;
+}
+
+.progress-track {
+    grid-column: span 2;
+    background-color: #e2e8f0;
+    height: 8px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 6px;
+}
+
+.progress-bar {
+    height: 100%;
+    border-radius: 10px;
+}
+
+.fill-blue { background-color: #2563eb; }
+.fill-orange { background-color: #f97316; }
+.fill-red { background-color: #dc2626; }
+.fill-pink { background-color: #ec4899; }
+
+.percentage-label {
+    grid-column: span 2;
+    font-size: 10px;
+    color: #94a3b8;
+    text-align: left;
+}
+
+.budget-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.b-item .b-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+.b-item small {
+    font-size: 10px;
+    color: #64748b;
+}
+
+/* Account Summary */
+.acc-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    background-color: #f8fafc;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.acc-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.acc-icon-box {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+}
+
+.acc-info strong {
+    display: block;
+    font-size: 13px;
+    color: #0f172a;
+}
+
+.acc-info small {
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+.acc-val {
+    font-size: 14px;
+    color: #0f172a;
+}
+
+
+
+/* ========================================== */
+/*             Top Summary Grid               */
+/* ========================================== */
+
+/* استخدام CSS Grid لتقسيم الكروت بالتساوي */
+.top-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 أعمدة متساوية الحجم */
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+/* تنسيق الكارت نفسه */
+.summary-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 20px 24px;
+    border: 1px solid #f1f5f9;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 120px;
+}
+
+/* العنوان العلوي للكارت */
+.summary-card .card-label {
+    font-size: 13px;
+    color: #94a3b8;
+    text-align: left; /* المحاذاة لليسار زي الصورة */
+    font-weight: 600;
+}
+
+/* المبلغ المالي */
+.summary-card .card-value {
+    font-size: 28px;
+    font-weight: 800;
+    color: #0f172a;
+    text-align: left; /* محاذاة المبلغ لليسار */
+    margin: 8px 0;
+    letter-spacing: -0.5px;
+}
+
+/* حاوية نسبة التغير تحت المبلغ */
+.badge-container {
+    display: flex;
+    justify-content: flex-end; /* وضع النسبة في أقصى اليسار تحت المبلغ */
+}
+
+.badge {
+    font-size: 12px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    direction: ltr; /* لضمان ظهور السهم جنب النسبة بشكل صحيح */
+}
+
+/* ألوان النسب */
+.badge-green {
+    color: #16a34a;
+}
+
+.badge-red {
+    color: #dc2626;
+}
+
+
+
+
+
+
+
+
+/* ========================================== */
+/*            Middle Section Grid             */
+/* ========================================== */
+
+.middle-section-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* نسبة 2 إلى 1 بين العمودين */
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.left-column-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 20px 24px;
+    border: 1px solid #f1f5f9;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.card h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+}
+
+.view-all-link {
+    font-size: 12px;
+    color: #64748b;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* --- Table --- */
+.transactions-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.transactions-table th {
+    text-align: right;
+    font-size: 12px;
+    color: #94a3b8;
+    font-weight: 600;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.transactions-table td {
+    padding: 12px 0;
+    border-bottom: 1px solid #f8fafc;
+    font-size: 13px;
+}
+
+.user-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-cell img, .icon-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.icon-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+}
+
+.user-cell strong { display: block; color: #0f172a; font-size: 13px; }
+.user-cell small { color: #94a3b8; font-size: 11px; }
+
+.cat-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.tag-green { background-color: #f0fdf4; color: #16a34a; }
+.tag-orange { background-color: #fff7ed; color: #ea580c; }
+.tag-blue { background-color: #eff6ff; color: #2563eb; }
+.tag-purple { background-color: #faf5ff; color: #9333ea; }
+.tag-teal { background-color: #f0fdfa; color: #0d9488; }
+.tag-red { background-color: #fef2f2; color: #dc2626; }
+
+.status-badge {
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+}
+.status-success { background-color: #f0fdf4; color: #16a34a; }
+.status-warning { background-color: #fffbeb; color: #d97706; }
+
+.amount { font-weight: 700; }
+.text-green { color: #16a34a; }
+.text-dark { color: #0f172a; }
+
+/* --- Activities --- */
+.activities-card h2 {
+    margin-bottom: 18px;
+}
+
+.activity-box {
+    padding: 12px 15px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.activity-blue {
+    background-color: #f0f7ff;
+    border-right: 4px solid #2563eb;
+}
+
+.activity-green {
+    background-color: #f0fdf4;
+    border-right: 4px solid #16a34a;
+}
+
+.act-details strong { display: block; font-size: 13px; color: #0f172a; }
+.act-details p { font-size: 11px; color: #64748b; margin: 3px 0; }
+.act-details small { font-size: 10px; color: #94a3b8; }
+
+.act-tag { font-size: 11px; font-weight: 600; }
+
+.view-all-activities {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+/* --- Bills --- */
+.bills-total-header {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.bills-total-header h3 { font-size: 26px; font-weight: 800; color: #0f172a; margin: 0; }
+.bills-total-header p { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+
+.bills-mini-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.bill-box {
+    background-color: #f8fafc;
+    border-radius: 12px;
+    padding: 14px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+}
+
+.bill-icon { font-size: 18px; margin-bottom: 4px; }
+.icon-blue { color: #2563eb; }
+.icon-yellow { color: #eab308; }
+.icon-green { color: #16a34a; }
+.icon-red { color: #ef4444; }
+
+.bill-title { font-size: 11px; color: #64748b; }
+.bill-price { font-size: 14px; color: #0f172a; }
+.due-tag { font-size: 10px; font-weight: 600; }
+.text-red { color: #dc2626; }
+.text-gray { color: #94a3b8; }
+
+/* ========================================== */
+/*            Middle Section Grid             */
+/* ========================================== */
+
+.middle-section-grid {
+    display: grid;
+    /* قلبنا النسب عشان الصغير يبقى على اليمين والكبير على الشمال */
+    grid-template-columns: 1fr 2fr; 
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ========================================== */
+/*         Bottom Section Grid (3 Columns)    */
+/* ========================================== */
+
+.bottom-section-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* 3 أعمدة متساوية بالظبط */
+    gap: 20px;
+}
+
+.center-column-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* --- العمود الأيمن: الميزانية --- */
+.budget-main-box {
+    background-color: #f0f7ff;
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.budget-main-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.b-label {
+    display: block;
+    font-size: 11px;
+    color: #2563eb;
+    margin-bottom: 2px;
+}
+
+.b-value {
+    font-size: 18px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.progress-track {
+    background-color: #e2e8f0;
+    height: 8px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 10px;
+}
+
+.fill-blue { background-color: #2563eb; }
+.fill-orange { background-color: #f97316; }
+.fill-red { background-color: #ef4444; }
+.fill-pink { background-color: #ec4899; }
+.fill-green { background-color: #16a34a; }
+
+.progress-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #64748b;
+    margin-top: 6px;
+}
+
+.budget-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.budget-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.item-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+}
+
+.item-title strong {
+    display: block;
+    font-size: 13px;
+    color: #0f172a;
+}
+
+.item-title small {
+    font-size: 10px;
+    color: #94a3b8;
+}
+
+.item-amount {
+    text-align: left;
+}
+
+.item-amount strong {
+    display: block;
+    font-size: 13px;
+    color: #0f172a;
+}
+
+.pill-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.pill-green { background-color: #f0fdf4; color: #16a34a; }
+.pill-red { background-color: #fef2f2; color: #dc2626; }
+.pill-yellow { background-color: #fffbeb; color: #d97706; }
+
+.bg-pink-light { background-color: #fdf2f8; }
+.text-pink { color: #ec4899; }
+
+/* --- العمود الأوسط: الرسم البياني وملخص الحساب --- */
+.chart-legend {
+    display: flex;
+    gap: 15px;
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+.bars-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 150px;
+    padding-bottom: 10px;
+}
+
+.chart-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    height: 100%;
+    justify-content: flex-end;
+}
+
+.chart-col span {
+    font-size: 11px;
+    color: #64748b;
+}
+
+.bars-group {
+    display: flex;
+    gap: 6px;
+    align-items: flex-end;
+    height: 120px;
+}
+
+.bar {
+    width: 10px;
+    border-radius: 4px;
+}
+
+.bar-green { background-color: #16a34a; }
+.bar-red { background-color: #ef4444; }
+
+.acc-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    background-color: #f8fafc;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.acc-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.acc-icon-box {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+}
+
+.acc-info strong { display: block; font-size: 13px; color: #0f172a; }
+.acc-info small { font-size: 11px; color: #94a3b8; }
+.acc-val { font-size: 14px; color: #0f172a; }
+
+/* --- العمود الأيسر: وسائل الدفع (3D Flip) --- */
+.cards-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.flip-card {
+    background-color: transparent;
+    width: 100%;
+    height: 150px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 16px;
+    padding: 16px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.card-purple { background: linear-gradient(135deg, #3730a3 0%, #1e1b4b 100%); }
+.card-red { background: linear-gradient(135deg, #be123c 0%, #881337 100%); }
+
+.flip-card-back {
+    transform: rotateY(180deg);
+    padding: 0;
+    justify-content: flex-start;
+}
+
+.card-purple-back { background: #1e1b4b; }
+.card-red-back { background: #881337; }
+
+.magnetic-strip {
+    width: 100%;
+    height: 32px;
+    background-color: #0f172a;
+    margin-top: 15px;
+}
+
+.cvv-box {
+    background-color: #ffffff;
+    color: #0f172a;
+    width: 80%;
+    margin: 10px auto;
+    padding: 4px 10px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+}
+
+.card-notice { font-size: 10px; color: #94a3b8; text-align: center; }
+
+.card-top { display: flex; justify-content: space-between; align-items: center; }
+.card-badge { background: rgba(255, 255, 255, 0.2); padding: 2px 8px; border-radius: 10px; font-size: 10px; }
+.card-brand { font-size: 16px; font-weight: 800; }
+.card-number { font-size: 16px; letter-spacing: 2px; text-align: right; direction: ltr; }
+.card-bottom { display: flex; justify-content: space-between; font-size: 11px; }
+
+/* Paypal Box */
+.paypal-box {
+    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+    border-radius: 16px;
+    padding: 16px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.paypal-top { display: flex; justify-content: flex-start; }
+.paypal-icon { font-size: 22px; }
+
+.paypal-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.paypal-bottom strong { display: block; font-size: 14px; }
+.paypal-bottom small { font-size: 10px; opacity: 0.8; display: block; }
+.paypal-bottom p { font-size: 11px; margin-top: 2px; opacity: 0.9; }
+.text-teal { color: #2dd4bf; }
+
+
+
+
+
+
+
+/* خلفية كارت الباي بال (الوش والضهر) */
+.card-paypal {
+    background: linear-gradient(135deg, #1d4ed8 0%, #1e3a8a 100%);
+}
+
+.card-paypal-back {
+    background: #1e3a8a;
+}
+
+/* تنسيق النصوص الخاصة بـ Paypal في الوش */
+.card-paypal-info {
+    text-align: right;
+    margin: auto 0;
+}
+
+.card-paypal-info strong {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.card-paypal-info small {
+    font-size: 11px;
+    color: #93c5fd;
+    display: block;
+    margin-top: 2px;
+}
+
+.text-teal {
+    color: #2dd4bf;
+    font-weight: 700;
+}
+
+
+
+
+
+/* ========================================== */
+/*     Fixed Sidebar & Container Structure    */
+/* ========================================== */
+
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f8fafc;
+}
+
+/* القائمة الجانبية الثابتة */
+.sidebar {
+    width: 250px;
+    height: 100vh; /* بياخد ارتفاع الشاشة الكامل */
+    position: fixed; /* يخليه ثابت مع السكرول */
+    top: 0;
+    right: 0; /* في اتجاه اليمين لأن الموقع RTL */
+    background-color: #ffffff;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    border-left: 1px solid #f1f5f9;
+    z-index: 100;
+    box-sizing: border-box;
+    overflow-y: auto; /* لو الشاشة صغيرة يتيح السكرول جواه هو بس */
+}
+
+/* تعويض مساحة الـ Sidebar الثابت في المحتوى الرئيسي */
+.main-content {
+    flex: 1;
+    margin-right: 250px; /* يسيب مساحة للـ Sidebar الثابت على اليمين */
+    padding: 25px 30px;
+    box-sizing: border-box;
+}
+
+/* --- اللوجو العلوي --- */
+.sidebar-brand {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 5px;
+}
+
+.brand-text {
+    text-align: right;
+}
+
+.brand-text h2 {
+    font-size: 26px;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1;
+    margin: 0;
+}
+
+.brand-text p {
+    font-size: 11px;
+    color: #64748b;
+    margin-top: 4px;
+}
+
+.brand-icon {
+    background: linear-gradient(135deg, #4f46e5, #3b82f6);
+    color: #ffffff;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    box-shadow: 0 6px 15px rgba(59, 130, 246, 0.25);
+}
+
+/* --- عناصر القائمة الجانبية --- */
+.sidebar-nav {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 18px;
+    color: #475569;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.sidebar-nav li a i {
+    font-size: 16px;
+}
+
+.sidebar-nav li.active a {
+    background-color: #eff6ff;
+    color: #2563eb;
+    font-weight: 700;
+}
+
+.sidebar-nav li a:hover {
+    background-color: #f8fafc;
+    color: #1e293b;
+}
+
+/* --- إجراءات سريعة --- */
+.quick-actions-section {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.quick-actions-section h3 {
+    font-size: 12px;
+    color: #94a3b8;
+    text-align: right;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.action-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 2px 0;
+    transition: transform 0.2s ease;
+}
+
+.action-item:hover {
+    transform: translateX(-3px);
+}
+
+.action-item span {
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.action-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+}
+
+.icon-blue { background-color: #eff6ff; color: #2563eb; }
+.icon-green { background-color: #f0fdf4; color: #16a34a; }
+.icon-purple { background-color: #faf5ff; color: #a855f7; }
+.icon-orange { background-color: #fff7ed; color: #f97316; }
